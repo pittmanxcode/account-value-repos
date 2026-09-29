@@ -1,14 +1,20 @@
-// Convert tmp/<company>_value_repository.xlsx.json into outputs/<company>_factory_value_repository.xlsx
-// Run from anywhere: node scripts/05_convert_workbook.js
+// Convert tmp/<slug>_value_repository.xlsx.json into outputs/<Company> × Factory Value.xlsx
+// Run from anywhere: node scripts/05_convert_workbook.js [slug]
 // Requires exceljs installed under tmp/ (npm install --prefix tmp exceljs).
+//
+// NAMING STANDARD for all account workbooks:
+//   outputs/{Company} × Factory Value.xlsx
+// where {Company} is the display name with an initial capital
+// (e.g. "Crunchyroll × Factory Value.xlsx"). Keep the " × " separator.
 const path = require("path");
 const fs = require("fs");
 module.paths.push(path.join(__dirname, "..", "tmp", "node_modules"));
 const ExcelJS = require("exceljs");
 
 const slug = process.argv[2] || "crunchyroll";
+const display = slug.charAt(0).toUpperCase() + slug.slice(1);
 const specPath = path.join(__dirname, "..", "tmp", `${slug}_value_repository.xlsx.json`);
-const outPath = path.join(__dirname, "..", "outputs", `${slug}_factory_value_repository.xlsx`);
+const outPath = path.join(__dirname, "..", "outputs", `${display} × Factory Value.xlsx`);
 const spec = JSON.parse(fs.readFileSync(specPath, "utf8"));
 
 (async () => {

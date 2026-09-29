@@ -52,6 +52,29 @@ PLAIN_SUMMARY = [
     "opportunity, not company-wide payroll savings.",
 ]
 
+# README-style headline block (leads the Executive Summary page, per owner's
+# finalized layout: README rewritten slightly, on top of the summary page).
+HEADLINE_BLOCK = [
+    ["OVERVIEW", ""],
+    ["A timestamped, auditable account-value analysis of Crunchyroll's open job", ""],
+    ["board: what every posting's responsibilities are, how well Factory (Droid,", ""],
+    ["Missions, automations) could perform them at experienced-professional", ""],
+    ["quality, and what capacity that would free.", ""],
+    ["", ""],
+    ["HEADLINE (base scenario, normal setup, human review)", ""],
+    ["- 18,695 hours/year of capacity freed across 77 posting-equivalents", ""],
+    ["  (12.6% of the 147,840-hour portfolio) = 9.7 FTE or 2,337 role-days.", ""],
+    ["- Conservative / base / upside: 8,000 / 18,695 / 30,830 hours.", ""],
+    ["- Salary-equivalent value (base): ~$1.52M USD ($1.98M fully loaded at 1.30),", ""],
+    ["  using US-equivalent pay for all locations per approved assumption.", ""],
+    ["- Best-fit work: software development, analytics, QA, accounting operations,", ""],
+    ["  data engineering. Least-fit: physical supply chain, workplace/facilities,", ""],
+    ["  partnership and legal sign-off, tax/SOX filing authority.", ""],
+    ["- Bespoke integrations (named builds only) add roughly +12% beyond the", ""],
+    ["  normal-setup baseline.", ""],
+    ["", ""],
+]
+
 # One-sentence explainer shown at the top of every page.
 EXPLAIN = {
     "Executive Summary": "This page gives the headline: how many hours Factory could free across all analyzed roles, under three scenarios, and which work fits best.",
@@ -68,11 +91,11 @@ EXPLAIN = {
 
 # --- Executive Summary -----------------------------------------------------
 exec_rows = [
-    ["Crunchyroll × Factory Value Repository", ""],
+    ["Crunchyroll × Factory Value", ""],
     ["Snapshot", "September 29, 2026 · 77 postings · 964 verbatim responsibilities · 30 clusters"],
     ["Basis", "Normal Factory setup with human review · US-equivalent pay · 1,920 h/FTE-year · one FTE per open posting"],
     [""],
-] + [[line] for line in PLAIN_SUMMARY] + [
+] + HEADLINE_BLOCK + [[line] for line in PLAIN_SUMMARY] + [
     [""],
     hdr_row(["Scenario", "Saved hours/yr", "Saved role-days", "FTE equiv.", "% capacity freed", "Salary-equiv value", "Loaded (×1.30)"]),
     ["Conservative", round(tots["conservative"]), round(tots["conservative"]/8), round(tots["conservative"]/1920, 1),

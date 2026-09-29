@@ -13,5 +13,7 @@
     "value_presentation": "conservative, base, upside",
     "deployment_boundary": "normal setup + human review (bespoke noted separately)"
   },
-  "notes": "Copy this file to config.json, fill in the target account, and follow templates/PROMPT.md. scripts/02_build_value_model.py keeps the assumption constants at the top of the file; update them to match this config when adapting to a new account."
+  "notes": "Copy this file to config.json, fill in the target account, and follow templates/PROMPT.md. scripts/02_build_value_model.py keeps the assumption constants at the top of the file; update them to match this config when adapting to a new account.",
+  "output_workbook_name": "{Company} × Factory Value.xlsx",
+  "naming_standard": "Every account's workbook is named '{Company} × Factory Value.xlsx' in outputs/ — display name, ' × ' separator, 'Factory Value' suffix. Example: 'Crunchyroll × Factory Value.xlsx'."
 }

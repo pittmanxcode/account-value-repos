@@ -29,7 +29,7 @@ and what capacity that would free.
 | Path | Contents |
 |---|---|
 | `REPORT.md` | Executive findings, rankings, and recommendations |
-| `outputs/crunchyroll_factory_value_repository.xlsx` | Polished workbook (10 sheets) |
+| `outputs/Crunchyroll × Factory Value.xlsx` | Polished workbook (10 sheets). Naming standard: `{Company} × Factory Value.xlsx` |
 | `data/raw/` | Source snapshots (Greenhouse API JSON, O*NET wage harvest) |
 | `data/processed/jobs.csv` | Full posting catalogue |
 | `data/processed/responsibilities.csv` | 964 verbatim responsibility bullets |

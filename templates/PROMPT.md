@@ -138,11 +138,13 @@ saved_hours = role_hours × addressable_share × net_time_reduction
 - `methodology/` — rubric, pay/time method, sources
 - `scripts/` — 01_parse_postings.py, 02_build_value_model.py, 03_validate.py,
   04_make_workbook_spec.py, 05_convert_workbook.js
-- `outputs/{{company_slug}}_factory_value_repository.xlsx` — sheets:
-  Executive Summary (with plain-text summary), Ranked Responsibilities,
-  Bespoke Opportunities, Role Summary, Jobs, Responsibility Catalogue,
-  Compensation, Time Benchmarks, Sources, Methodology — each opening with a
-  plain-text explainer row.
+- `outputs/{Company} × Factory Value.xlsx` — the standard workbook name for
+  every account (display name, " × " separator, "Factory Value" suffix; e.g.
+  `Crunchyroll × Factory Value.xlsx`). Sheets: Executive Summary (opening
+  with a README-style headline block, then a plain-text summary), Ranked
+  Responsibilities, Bespoke Opportunities, Role Summary, Jobs, Responsibility
+  Catalogue, Compensation, Time Benchmarks, Sources, Methodology — each
+  page opening with a plain-text explainer row.
 
 ## PHASE 7 — Validation gate (all must pass before delivery)
 
