@@ -1,0 +1,17 @@
+{
+  "company_name": "Example Corp",
+  "company_slug": "example-corp",
+  "careers_url": "https://www.examplecorp.com/careers",
+  "ats": "greenhouse",
+  "board_token": "examplecorp",
+  "board_api_url": "https://boards-api.greenhouse.io/v1/boards/examplecorp/jobs?content=true",
+  "assumptions": {
+    "annual_hours_per_fte": 1920,
+    "loaded_factor": 1.30,
+    "adoption": { "conservative": 0.50, "base": 0.75, "upside": 0.90 },
+    "compensation_basis": "US-equivalent pay",
+    "value_presentation": "conservative, base, upside",
+    "deployment_boundary": "normal setup + human review (bespoke noted separately)"
+  },
+  "notes": "Copy this file to config.json, fill in the target account, and follow templates/PROMPT.md. scripts/02_build_value_model.py keeps the assumption constants at the top of the file; update them to match this config when adapting to a new account."
+}

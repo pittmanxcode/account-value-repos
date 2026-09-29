@@ -1,0 +1,11 @@
+# node/npm artifacts for the workbook converter
+tmp/node_modules/
+tmp/package-lock.json
+node_modules/
+
+# python artifacts
+__pycache__/
+*.pyc
+
+# OS noise
+.DS_Store
