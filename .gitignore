@@ -1,11 +1,23 @@
 # node/npm artifacts for the workbook converter
 tmp/node_modules/
 tmp/package-lock.json
+tmp/run/
 node_modules/
 
 # python artifacts
+.venv/
 __pycache__/
 *.pyc
+*.egg-info/
+
+# local run outputs (published via PRs, not direct commits)
+accounts/
+requests/
+failures/
+validation-report.txt
+
+# local config (may carry repo-specific settings)
+config.yaml
 
 # OS noise
 .DS_Store

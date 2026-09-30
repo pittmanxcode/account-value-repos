@@ -1,62 +1,81 @@
-# Crunchyroll × Factory Value Repository
+# Account Value Repos
 
-A timestamped, auditable account-value analysis of Crunchyroll's open job
-board: what every posting's responsibilities are, how well Factory (Droid,
-Missions, automations) could perform them at experienced-professional quality,
-and what capacity that would free.
+One automated pipeline that produces review-ready account value packages
+(`{Company} × Factory Value.xlsx` plus reports and full provenance), with two
+intake loops:
 
-**Snapshot date:** September 29, 2026 · **Postings captured:** 77 of 77
-(exact reconciliation with the live board) · **Verbatim responsibilities:**
-964 bullets across 30 normalized clusters.
+| Loop | What you do | Status |
+|---|---|---|
+| **V1 — Manual account intake** | Type the company name. Everything after that — identity resolution, compelling-event research, job-board analysis, value reconciliation, workbook, validation, review PR — runs automatically. | **Ready now** |
+| **V2 — Buyer-readiness well intake** | The well supplies ranked, pre-qualified accounts and any value it already computed; the pipeline preserves that value and adds job-board analysis. | Implemented and tested; **publication disabled** until the well passes its readiness gate |
 
-## Headline (base scenario, normal setup, human review)
+Both loops share the same analysis engine, the same 10-sheet workbook format
+modeled on the golden Crunchyroll build, and the same approval contract: a
+generated account is approved when its record is merged to the default branch.
 
-- **18,695 hours/year** of capacity freed across 77 posting-equivalents
-  (12.6% of the 147,840-hour portfolio) ≈ **9.7 FTE** or 2,337 role-days.
-- **Conservative / base / upside:** 8,000 / 18,695 / 30,830 hours.
-- **Salary-equivalent value (base):** ≈ $1.52M USD ($1.98M fully loaded at
-  1.30), using US-equivalent pay for all locations per approved assumption.
-  33 US postings use Crunchyroll's posted ranges; the rest use BLS OEWS
-  May 2025 medians by occupation and seniority.
-- Best-fit work: software development, analytics, QA, accounting operations,
-  data engineering. Least-fit: physical supply chain, workplace/facilities,
-  partnership and legal sign-off, tax/SOX filing authority.
-- Bespoke integrations (named builds only) add roughly **+12%** beyond the
-  normal-setup baseline.
+## Choose your loop
 
-## Navigation
-
-| Path | Contents |
-|---|---|
-| `REPORT.md` | Executive findings, rankings, and recommendations |
-| `outputs/Crunchyroll × Factory Value.xlsx` | Polished workbook (10 sheets). Naming standard: `{Company} × Factory Value.xlsx` |
-| `data/raw/` | Source snapshots (Greenhouse API JSON, O*NET wage harvest) |
-| `data/processed/jobs.csv` | Full posting catalogue |
-| `data/processed/responsibilities.csv` | 964 verbatim responsibility bullets |
-| `data/processed/responsibilities_normalized.csv` | Bullets mapped to taxonomy clusters |
-| `data/processed/scored_responsibilities.csv` | Job × cluster fit, hours, pay, scenarios |
-| `data/processed/role_summary.csv` | Per-role ranking and value |
-| `data/processed/cluster_ranking.csv` | Cluster-level portfolio ranking |
-| `methodology/` | Rubric, pay/time method, sources |
-| `scripts/` | Repeatable pipeline (01 parse → 02 model → 03 validate → 04 spec → 05 convert) |
-| `templates/` | Reusable prompt-system export for rerunning on any account |
-
-## Reproduce
+**"I have a company in mind"** → V1:
 
 ```bash
-python3 scripts/01_parse_postings.py     # rebuild catalogue from raw snapshot
-python3 scripts/02_build_value_model.py  # rebuild scoring and value model
-python3 scripts/03_validate.py           # run the 20-check validation gate
+make setup                 # once: venv, package, exceljs under tmp/
+account-value doctor       # preflight
+account-value run "Acme Corp"
+# or with known identity:
+account-value run "Acme Corp" --domain acme.com --careers-url https://acme.com/careers
 ```
 
-Re-collection: `curl "https://boards-api.greenhouse.io/v1/boards/crunchyroll/jobs?content=true" -o data/raw/greenhouse_board_snapshot.json`
+You confirm the identity the wizard resolves; everything else is automated.
+When validation passes, the package is pushed to a branch and one draft PR is
+opened for your review. When it fails, a failure report lands in `failures/`
+and nothing is published.
 
-## Limitations
+**"The well should feed it"** → V2 (read-only for now):
 
-- One FTE assumed per open posting; public data does not reveal headcount.
-- Time allocation is bullet-proportional, not a measured time study.
-- Non-US postings valued at hypothetical US-equivalent pay (per approved
-  decision), not local compensation.
-- Scenario parameters are documented assumptions anchored to cited
-  benchmarks; all are editable constants in `scripts/02_build_value_model.py`.
-- The job board is dynamic; figures reflect the September 29, 2026 snapshot.
+```bash
+account-value well doctor   # readiness gate against the well's export
+account-value well plan     # what a batch would process, once ready and enabled
+account-value well run      # blocked: well_enabled: false in config.yaml
+```
+
+## Learn more
+
+- [docs/MANUAL_ACCOUNT_INPUT.md](docs/MANUAL_ACCOUNT_INPUT.md) — V1 walkthrough
+- [docs/AUTOMATED_WELL_INPUT.md](docs/AUTOMATED_WELL_INPUT.md) — V2 contract and enablement checklist
+- [docs/VALUE_RECONCILIATION.md](docs/VALUE_RECONCILIATION.md) — how inherited and job-board value combine
+- [docs/REVIEW_GUIDE.md](docs/REVIEW_GUIDE.md) — reviewing a package PR; what merge approves
+- [docs/OPERATIONS.md](docs/OPERATIONS.md) — credentials, logs, idempotency, recovery
+
+## What "value" means here
+
+Every number is a **value component** with evidence, provenance, and an
+overlap key:
+
+- **Inherited compelling-event value** (typed at intake or imported from the
+  well) is preserved verbatim — never recalculated, never overwritten.
+- **Job-board capacity value** comes from parsing the company's open postings
+  and scoring them against the Factory-fit taxonomy (three scenarios:
+  conservative/base/upside).
+- **Combined totals** require overlap reconciliation: confirmed duplicates
+  count once, distinct work surfaces sum, and unresolved overlaps block a
+  combined headline rather than silently double counting.
+
+## The golden example
+
+The original Crunchyroll build lives unchanged under
+`examples/crunchyroll/` — it is the regression fixture: the generalized
+pipeline must reproduce its established headline totals within rounding
+tolerance. Run its original pipeline with:
+
+```bash
+cd examples/crunchyroll && python3 scripts/01_parse_postings.py && \
+python3 scripts/02_build_value_model.py && python3 scripts/03_validate.py
+```
+
+## Development
+
+```bash
+make setup    # .venv + editable install + exceljs under tmp/
+make test     # pytest
+make lint     # ruff
+```

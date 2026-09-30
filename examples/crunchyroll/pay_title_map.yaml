@@ -1,0 +1,224 @@
+# Exact title -> SOC/seniority map captured during the golden Crunchyroll run.
+# Used by the generalized pipeline as per-account pay overrides.
+Accounting Director - Mexico:
+  seniority: director
+  soc: 11-3031.00
+Accounts Payable Analyst:
+  seniority: mid
+  soc: 43-3031.00
+Associate Approvals Manager:
+  seniority: mid
+  soc: 13-1111.00
+Business Affairs Associate I:
+  seniority: entry
+  soc: 13-1111.00
+CX Operations Analyst:
+  seniority: mid
+  soc: 13-1161.00
+Corporate Strategy Senior Analyst:
+  seniority: senior
+  soc: 13-1111.00
+Creative Executive:
+  seniority: exec
+  soc: 27-1011.00
+Data Engineer III:
+  seniority: senior
+  soc: 15-1252.00
+Deal Management Analyst:
+  seniority: mid
+  soc: 13-2051.00
+Deal Management Senior Analyst:
+  seniority: senior
+  soc: 13-2051.00
+Delivery Operations Coordinator:
+  seniority: mid
+  soc: 43-6014.00
+Designer - Collectibles:
+  seniority: mid
+  soc: 27-1024.00
+Director, AI Enablement:
+  seniority: director
+  soc: 11-3021.00
+Director, People Strategy & Partnership:
+  seniority: director
+  soc: 11-3121.00
+Director, Product Security:
+  seniority: director
+  soc: 15-1212.00
+GTM Programs, Senior Manager - UCANZ - Membership Value (Contract):
+  seniority: manager
+  soc: 11-2021.00
+General Manager, Latin America (LATAM):
+  seniority: exec
+  soc: 11-1021.00
+Internal Communications Senior Manager:
+  seniority: manager
+  soc: 27-3031.00
+Lead Finance Data Analyst:
+  seniority: lead
+  soc: 15-2051.00
+Lead Financial Business Analyst:
+  seniority: lead
+  soc: 13-2051.00
+Manager, GTM - UCANZ (Contract):
+  seniority: manager
+  soc: 11-2021.00
+Metadata Manager:
+  seniority: manager
+  soc: 13-1111.00
+Paid Social Senior Manager:
+  seniority: manager
+  soc: 11-2021.00
+Principal Engineer, Engineering Practices:
+  seniority: staff
+  soc: 15-1252.00
+Principal Technical Program Manager, Enterprise Technology:
+  seniority: staff
+  soc: 13-1082.00
+SVOD Strategy Senior Manager:
+  seniority: manager
+  soc: 13-1111.00
+Salesforce Technical Administrator:
+  seniority: mid
+  soc: 15-1244.00
+Security Analyst:
+  seniority: mid
+  soc: 15-1212.00
+Senior AI Engineer:
+  seniority: senior
+  soc: 15-1252.00
+Senior CX Analytics Manager:
+  seniority: manager
+  soc: 13-1161.00
+Senior CX Insights Manager, LATAM:
+  seniority: manager
+  soc: 13-1161.00
+Senior Database Engineer:
+  seniority: senior
+  soc: 15-1243.00
+Senior Database Operations Engineer:
+  seniority: senior
+  soc: 15-1243.00
+Senior Database Reliability Engineer:
+  seniority: senior
+  soc: 15-1243.00
+Senior Engineer, Insights & Reliability Engineering:
+  seniority: senior
+  soc: 15-1252.00
+Senior IT Engineer, SaaS Applications:
+  seniority: senior
+  soc: 15-1244.00
+Senior Identity Engineer:
+  seniority: senior
+  soc: 15-1212.00
+Senior Instructional Designer, Customer Experience:
+  seniority: senior
+  soc: 13-1151.00
+Senior MLOps Engineer:
+  seniority: senior
+  soc: 15-1252.00
+Senior Machine Learning Engineer, Fraud Detection:
+  seniority: senior
+  soc: 15-2051.00
+Senior Manager, CRM Marketing, APAC:
+  seniority: manager
+  soc: 11-2021.00
+Senior Manager, CRM Marketing, Europe:
+  seniority: manager
+  soc: 11-2021.00
+Senior Manager, Global Partnerships:
+  seniority: manager
+  soc: 11-2021.00
+Senior Producer, Anime Co-Production:
+  seniority: senior
+  soc: 27-2012.00
+Senior Program Manager:
+  seniority: senior
+  soc: 13-1082.00
+Senior Program Manager - Customer Experience:
+  seniority: senior
+  soc: 13-1082.00
+Senior SOX Analyst:
+  seniority: senior
+  soc: 13-2011.00
+Senior Security Engineer:
+  seniority: senior
+  soc: 15-1212.00
+Senior Site Reliability Engineer:
+  seniority: senior
+  soc: 15-1252.00
+Senior Software Engineer - Android, Partner Engineering:
+  seniority: senior
+  soc: 15-1252.00
+Senior Software Engineer -Backend/Full Stack:
+  seniority: senior
+  soc: 15-1252.00
+Senior Software Engineer, Apple:
+  seniority: senior
+  soc: 15-1252.00
+Senior Software Engineer, EDGE Discovery:
+  seniority: senior
+  soc: 15-1252.00
+Senior Software Engineer, Infrastructure Engineering:
+  seniority: senior
+  soc: 15-1252.00
+Senior Specialist, Distribution Operations:
+  seniority: senior
+  soc: 13-1111.00
+Senior Strategic Sourcing Manager, Marketing:
+  seniority: manager
+  soc: 11-3061.00
+Software Engineer:
+  seniority: mid
+  soc: 15-1252.00
+Software Engineer I, Android:
+  seniority: entry
+  soc: 15-1252.00
+Software Engineer II, Android:
+  seniority: mid
+  soc: 15-1252.00
+Software Engineer II, Frontend:
+  seniority: mid
+  soc: 15-1252.00
+Software Engineer III, Apple:
+  seniority: senior
+  soc: 15-1252.00
+Software Engineer III, Media Delivery:
+  seniority: senior
+  soc: 15-1252.00
+Software Engineer III, Playback Services:
+  seniority: senior
+  soc: 15-1252.00
+Software Engineer III, Service Monetization:
+  seniority: senior
+  soc: 15-1252.00
+Staff AI Engineer:
+  seniority: staff
+  soc: 15-1252.00
+Staff Site Reliability Engineer:
+  seniority: staff
+  soc: 15-1252.00
+Staff Software Engineer:
+  seniority: staff
+  soc: 15-1252.00
+Staff Software Engineer, AI/ML:
+  seniority: staff
+  soc: 15-1252.00
+Staff Software Engineer, Partner Engineering:
+  seniority: staff
+  soc: 15-1252.00
+Strategic Sourcing Manager, Technology:
+  seniority: manager
+  soc: 11-3061.00
+Supply Chain & Manufacturing Manager, Collectibles:
+  seniority: manager
+  soc: 11-3061.00
+Tax Manager - LATAM:
+  seniority: manager
+  soc: 13-2011.00
+Vice President, Content Protection & Anti-Piracy:
+  seniority: exec
+  soc: 23-1011.00
+シニア・プロデューサー、アニメコープロダクション:
+  seniority: senior
+  soc: 27-2012.00

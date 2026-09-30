@@ -1,0 +1,81 @@
+# Compelling-event signal registry, adapted from the buyer-readiness well's
+# operating rules v1 §2 (registry v1). Only signals with a defensible value
+# path are listed; rows without anchors stay honest unknowns.
+#
+# Roles: Q = qualifying, C = corroborating, RT = research trigger.
+# effort_anchor_hours_per_unit: null means "unknown, where looked" — the
+# displaced-work arm stays unknown until a defensible anchor exists.
+schema_version: 1
+
+deadline_signals:
+  - id: R1
+    name: Java 8/11 + Spring Boot 2.7/3.x
+    trigger: "Boot 2.7 OSS end Nov 24, 2023; Oracle licensing ongoing"
+    trigger_date: "2023-11-24"
+    hard_cost_anchor: "Oracle $15->$5.25/employee/mo"
+    hard_cost_label: CD
+    effort_anchor_hours_per_unit: 200   # conservative end, HeroDevs (TP/EST)
+    effort_unit: application
+    match_patterns: "java ?8|java ?11|spring boot|jdk"
+  - id: R2
+    name: .NET 4.6.2 + Windows Server 2016
+    trigger: "WS2016/.NET 4.6.2 end of support Jan 12, 2027"
+    trigger_date: "2027-01-12"
+    hard_cost_anchor: "ESU 100% of full license price/yr"
+    hard_cost_label: CD
+    effort_anchor_hours_per_unit: null
+    effort_unit: application
+    match_patterns: "\\.net (framework|4\\.6)|windows server 2016"
+  - id: R3
+    name: SQL Server 2016
+    trigger: "SQL Server 2016 end of support Jul 14, 2026 (passed)"
+    trigger_date: "2026-07-14"
+    hard_cost_anchor: "ESU 100% of full license price/yr, flat all three years"
+    hard_cost_label: CD
+    effort_anchor_hours_per_unit: null
+    effort_unit: database
+    match_patterns: "sql server 201"
+  - id: R4
+    name: Rails <=7.2 / Ruby <=3.2
+    trigger: "Ruby 3.2 EOL Apr 1, 2026; Rails 7.2 security end ~Aug 9, 2026"
+    trigger_date: "2026-04-01"
+    hard_cost_anchor: null
+    hard_cost_label: null
+    effort_anchor_hours_per_unit: null
+    effort_unit: application
+    match_patterns: "ruby on rails|rails \\d|ruby \\d"
+  - id: R6
+    name: Accessibility (Title II / 504 / EAA)
+    trigger: "Title II Apr 26, 2027; HHS 504 May 11, 2027 (15+ staff); EAA since Jun 28, 2025"
+    trigger_date: "2027-04-26"
+    hard_cost_anchor: null
+    hard_cost_label: null
+    effort_anchor_hours_per_unit: null
+    effort_unit: application
+    match_patterns: "accessibility|wcag|\\bvp\\b|\\bvpv?\\b|ada (title|compliance)"
+  - id: R7
+    name: EU Cyber Resilience Act
+    trigger: "Reporting since Sep 11, 2026; main obligations Dec 11, 2027"
+    trigger_date: "2026-09-11"
+    hard_cost_anchor: "fines up to EUR 15M or 2.5% of worldwide turnover"
+    hard_cost_label: TP
+    effort_anchor_hours_per_unit: null
+    effort_unit: product
+    match_patterns: "cyber resilience act|\\bcra\\b|ce mark"
+  - id: R9
+    name: PCI DSS 4.0.1
+    trigger: "6.4.3/11.6.1 mandatory since Mar 31, 2025"
+    trigger_date: "2025-03-31"
+    hard_cost_anchor: "acquirer fees $5k-$100k/mo"
+    hard_cost_label: TP
+    effort_anchor_hours_per_unit: null
+    effort_unit: checkout
+    match_patterns: "pci dss|pci compliance|payment card industry"
+
+catalog_signals:
+  - {id: C1, name: migration language, value_type: conditional_per_unit,
+     match_patterns: "migrat|moderniz|monolith|re-?platform|rewrite|sunset|decommission|upgrade to"}
+  - {id: B1, name: instability in reqs, value_type: indirect,
+     match_patterns: "legacy|tech debt|technical debt|outdated|stabil"}
+  - {id: M3, name: AI mandate stated, value_type: indirect,
+     match_patterns: "ai (strategy|transformation|enablement|adoption)|artificial intelligence initiative"}

@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "account-value"
+version = "0.1.0"
+description = "Account value repositories: one automated pipeline, two intake loops (manual account name, buyer-readiness well)"
+requires-python = ">=3.12"
+dependencies = [
+    "pydantic==2.13.5",
+    "PyYAML==6.0.3",
+    "httpx==0.28.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.5",
+]
+
+[project.scripts]
+account-value = "account_value.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+account_value = ["data/*.txt", "data/*.yaml", "wb_convert.js"]
+
+[tool.ruff]
+line-length = 120
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+# taxonomy.py and workbook.py carry long verbatim data rows ported from the
+# golden fixture; wrapping them would only obscure diffs.
+"src/account_value/taxonomy.py" = ["E501"]
+"src/account_value/workbook.py" = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
