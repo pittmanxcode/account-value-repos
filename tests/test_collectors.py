@@ -1,7 +1,6 @@
 """Collectors: parsing, reconciliation, terms-blocked honesty."""
 
 import json
-from pathlib import Path
 
 import pytest
 
@@ -53,7 +52,7 @@ def test_unsupported_ats_raises(tmp_path):
         run_collector("smartrecruiters", "x", tmp_path)
 
 
-def test_jsonld_extract():
+def test_jsonld_extract(tmp_path):
     page = """
     <html><head>
     <script type="application/ld+json">
@@ -61,24 +60,24 @@ def test_jsonld_extract():
      "url":"https://x/jobs/1",
      "responsibilities":"<p>Build backend services and debug production issues</p>"}
     </script></head></html>"""
-    result = run_collector("jsonld", "https://x/careers", Path("tmp"),
+    result = run_collector("jsonld", "https://x/careers", tmp_path,
                            fetch=lambda url: FakeResponse(text=page))
     assert len(result.jobs) == 1
     assert result.jobs[0].title == "Backend Engineer"
     assert "Build backend services" in result.bullets[0].verbatim_responsibility
 
 
-def test_jsonld_falls_back_to_page_sections():
+def test_jsonld_falls_back_to_page_sections(tmp_path):
     page = "<html><body><h2>Key Responsibilities</h2><p>Build and ship backend services daily here</p></body></html>"
-    result = run_collector("jsonld", "https://x/careers", Path("tmp"),
+    result = run_collector("jsonld", "https://x/careers", tmp_path,
                            fetch=lambda url: FakeResponse(text=page))
     assert result.jobs
     assert result.bullets
 
 
-def test_jsonld_no_postings_raises():
+def test_jsonld_no_postings_raises(tmp_path):
     with pytest.raises(CollectorError, match="no JSON-LD"):
-        run_collector("jsonld", "https://x/careers", Path("tmp"),
+        run_collector("jsonld", "https://x/careers", tmp_path,
                       fetch=lambda url: FakeResponse(text="<html><body>hi</body></html>"))
 
 
