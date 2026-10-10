@@ -1,0 +1,14 @@
+company_name: Engine
+company_slug: engine
+domain: engine.com
+careers_url: https://job-boards.greenhouse.io/engine
+ats: greenhouse
+ats_token: engine
+inherited_components: []
+notes: 'factory-migration-accounts.xlsx Qualified #7 (business-value; doc name: Engine (formerly Hotel
+  Engine)). Deciding what moves out of its monolith into microservices and re-architecting customer accounts
+  for enterprise parent-child structures, after buying Options Travel (Jul 31, 2026). Doc posting: Senior
+  Software Engineer - Travel Management, first published Jul 22, 2026 (likely closed). Driver source:
+  Skift, Jul 31, 2026.'
+origin: manual
+account_id: ''

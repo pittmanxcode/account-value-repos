@@ -1,0 +1,14 @@
+company_name: Turo
+company_slug: turo
+domain: turo.com
+careers_url: https://turo.wd12.myworkdayjobs.com/Turo_careers
+ats: workday
+ats_token: https://turo.wd12.myworkdayjobs.com/Turo_careers
+inherited_components: []
+notes: 'factory-migration-accounts.xlsx Qualified #24 (business-value). Driving the decomposition of its
+  legacy monolith into independently deployable services; Turo Delivered launches early Nov 2026 in 5
+  countries. Doc posting: Senior Software Engineer, API (closed Jan 31, 2026). Driver source: Auto Rental
+  News, Sep 21, 2026. NOTE: job board is Workday-hosted, which the collector refuses by design (no public
+  unauthenticated API), so this run is an honest failure record.'
+origin: manual
+account_id: ''

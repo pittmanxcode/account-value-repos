@@ -1,0 +1,13 @@
+company_name: Filevine
+company_slug: filevine
+domain: filevine.com
+careers_url: https://jobs.lever.co/filevine
+ats: lever
+ats_token: filevine
+inherited_components: []
+notes: 'factory-migration-accounts.xlsx Qualified #11 (business-value). Moving its C#/.NET monolith to
+  microservices while folding acquired products (Pincites, Jan 2026) into one platform, after a $400M
+  raise in 2025. Doc posting: Software Architect I, created Feb 12, 2026. Driver source: Filevine release,
+  Jan 14, 2026.'
+origin: manual
+account_id: ''

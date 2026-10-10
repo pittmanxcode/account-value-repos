@@ -1,0 +1,14 @@
+company_name: Reddit
+company_slug: reddit
+domain: redditinc.com
+careers_url: https://job-boards.greenhouse.io/reddit
+ats: greenhouse
+ats_token: reddit
+inherited_components: []
+notes: 'factory-migration-accounts.xlsx Qualified #22 (business-value). Infrastructure undergoing what
+  the posting calls its most significant modernization in company history, across 30+ platform teams:
+  moving off legacy clusters, new storage and messaging, multi-region serving. Doc posting: Staff Technical
+  Program Manager, Infrastructure (live). Driver source: international growth coverage (Yahoo Finance),
+  Q2 2026.'
+origin: manual
+account_id: ''

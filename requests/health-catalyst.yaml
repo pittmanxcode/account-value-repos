@@ -1,0 +1,14 @@
+company_name: Health Catalyst
+company_slug: health-catalyst
+domain: healthcatalyst.com
+careers_url: https://healthcatalyst.wd5.myworkdayjobs.com/healthcatalystcareers
+ats: workday
+ats_token: https://healthcatalyst.wd5.myworkdayjobs.com/healthcatalystcareers
+inherited_components: []
+notes: 'factory-migration-accounts.xlsx Qualified #13 (business-value). Moving client data marts from
+  its legacy DOS platform (SQL Server) to its new Ignite platform (Databricks); the CFO expects to be
+  past migration-related churn by end of 2027. Doc posting: Sr Data Engineer - Integrations, removed Jun
+  30, 2026. Driver source: Q2 2026 earnings call, Aug 6, 2026. NOTE: job board is Workday-hosted, which
+  the collector refuses by design (no public unauthenticated API), so this run is an honest failure record.'
+origin: manual
+account_id: ''

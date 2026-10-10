@@ -1,0 +1,13 @@
+company_name: EQB
+company_slug: eqb
+domain: eqb.com
+careers_url: https://jobs.lever.co/eqbank
+ats: lever
+ats_token: eqbank
+inherited_components: []
+notes: 'factory-migration-accounts.xlsx Qualified #8 (business-value; doc name: EQB Inc. (EQ Bank)). Moving
+  PC Financial''s customers and products onto EQ Bank''s systems after the acquisition closed Jul 1, 2026,
+  and exiting the seller''s transition services. Doc posting: VP, Integration Management Office, created
+  Sep 21, 2026. Driver source: EQB release, Jul 1, 2026.'
+origin: manual
+account_id: ''
