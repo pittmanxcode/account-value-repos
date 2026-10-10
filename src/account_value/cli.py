@@ -39,7 +39,24 @@ def main(argv: list[str] | None = None) -> int:
     doctor = sub.add_parser("doctor", help="preflight for this machine")
     doctor.add_argument("--workspace", default=".")
 
+    brief = sub.add_parser(
+        "brief-context",
+        help="gather a finished package's postings and numbers into brief-context.md",
+    )
+    brief.add_argument("slug", help="account slug under accounts/")
+    brief.add_argument("--workspace", default=".")
+
     args = parser.parse_args(argv)
+
+    if args.command == "brief-context":
+        from account_value.brief_context import write_context
+
+        package_dir = Path(args.workspace) / "accounts" / args.slug
+        if not (package_dir / "account-value.json").exists():
+            print(f"no package at {package_dir}; run `account-value run` first")
+            return 1
+        print(write_context(package_dir))
+        return 0
 
     if args.command == "well":
         from account_value.well import commands
