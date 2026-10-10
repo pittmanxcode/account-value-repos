@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from decimal import Decimal
@@ -95,6 +96,52 @@ def _fetch_none(url: str):
     raise PipelineError(f"network fetch attempted in offline mode: {url}")
 
 
+_WORKDAY_HOST = re.compile(r"[a-z0-9-]+\.wd\d+\.myworkdayjobs\.com", re.I)
+
+
+def collect_with_fallback(request, identity, raw_dir: Path, fetch=None) -> CollectionResult:
+    """Primary path is the configured ATS, else JSON-LD on the careers page.
+    Only when that raises do we try the fallbacks, in order, and the chosen
+    path is recorded in the collection notes so provenance shows it."""
+    url = request.careers_url or (identity.careers_url if identity else "")
+    if request.ats and request.ats_token:
+        primary = (request.ats, request.ats_token)
+    elif url:
+        primary = (request.ats, request.ats_token or url) if request.ats else ("jsonld", url)
+    else:
+        raise CollectorError("no careers source resolved for this account")
+
+    try:
+        return run_collector(primary[0], primary[1], raw_dir, fetch=fetch)
+    except CollectorError as primary_error:
+        tried = [f"{primary[0]} ({primary_error})"]
+        for ats, token in _fallback_candidates(primary, request, url):
+            try:
+                collection = run_collector(ats, token, raw_dir, fetch=fetch)
+            except CollectorError as error:
+                tried.append(f"{ats} ({error})")
+                continue
+            collection.notes.append(
+                f"fallback: {ats} used after primary failed — " + "; ".join(tried)
+            )
+            return collection
+        raise CollectorError(
+            "all collection paths failed: " + "; ".join(tried)
+        ) from primary_error
+
+
+def _fallback_candidates(primary, request, url: str) -> list[tuple[str, str]]:
+    """Fallbacks that can be tried without new credentials or services. Any
+    Workday-hosted careers URL gets the public JSON collector; a Nimble-based
+    fetch is the next step but needs a separate approval, so it is not here."""
+    out: list[tuple[str, str]] = []
+    for candidate in (url, request.ats_token):
+        if candidate and _WORKDAY_HOST.search(candidate) and primary[0] != "workday":
+            out.append(("workday", candidate))
+            break
+    return out
+
+
 def run_account(
     request: AccountRequest,
     workspace: Path,
@@ -139,18 +186,10 @@ def run_account(
             verified=bool(request.domain),
         )
 
-    # 2. Job-board collection.
+    # 2. Job-board collection: the prebuilt collector first, fallbacks only on
+    #    failure (Michael, 2026-10-10).
     if collection is None:
-        if request.ats and request.ats_token:
-            collection = run_collector(request.ats, request.ats_token, raw_dir, fetch=fetch)
-        elif request.careers_url or (identity and identity.careers_url):
-            url = request.careers_url or identity.careers_url
-            if request.ats:
-                collection = run_collector(request.ats, request.ats_token or url, raw_dir, fetch=fetch)
-            else:
-                collection = run_collector("jsonld", url, raw_dir, fetch=fetch)
-        else:
-            raise CollectorError("no careers source resolved for this account")
+        collection = collect_with_fallback(request, identity, raw_dir, fetch=fetch)
     if not collection.reconciled:
         raise CollectorError(
             f"posting count did not reconcile: advertised {collection.advertised_count}, "

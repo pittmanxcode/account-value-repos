@@ -27,8 +27,7 @@ def collect(ats: str, token_or_url: str, raw_dir: Path, fetch=None) -> Collectio
     if ats == "ashby":
         return ashby.collect(token_or_url, raw_dir, fetch=fetch)
     if ats == "workday":
-        workday.collect(token_or_url, raw_dir, fetch=fetch)
-        raise UnsupportedCollector("workday collector never returns")  # pragma: no cover
+        return workday.collect(token_or_url, raw_dir, fetch=fetch)
     if ats == "jsonld":
         return jsonld.collect(token_or_url, raw_dir, fetch=fetch)
     raise UnsupportedCollector(f"unsupported ATS: {ats!r}")
