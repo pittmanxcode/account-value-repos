@@ -1,0 +1,13 @@
+company_name: Fivetran
+company_slug: fivetran
+domain: fivetran.com
+careers_url: https://job-boards.greenhouse.io/fivetran
+ats: greenhouse
+ats_token: fivetran
+inherited_components: []
+notes: 'factory-migration-accounts.xlsx Qualified #12 (business-value; doc name: Fivetran + dbt Labs,
+  merged Jun 1, 2026). Moving every dbt Cloud customer account from legacy environments onto a new multi-cell
+  architecture while the two companies integrate. Doc posting: Senior Platform Software Engineer, Transport,
+  posted June 2026. Driver source: Fivetran merger release, Jun 1, 2026.'
+origin: manual
+account_id: ''

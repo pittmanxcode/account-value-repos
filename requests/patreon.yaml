@@ -1,0 +1,13 @@
+company_name: Patreon
+company_slug: patreon
+domain: patreon.com
+careers_url: https://jobs.ashbyhq.com/patreon
+ats: ashby
+ats_token: patreon
+inherited_components: []
+notes: 'factory-migration-accounts.xlsx Qualified #27 (compliance deadline). Leading modernization of
+  backend architecture, service boundaries and data access patterns, while every creator must move off
+  legacy billing by Nov 1, 2026 (Apple''s deadline). Doc posting: Staff Software Engineer, Backend Platform,
+  published Aug 28, 2026. Driver source: Patreon Help Center: legacy billing ends Nov 1, 2026.'
+origin: manual
+account_id: ''

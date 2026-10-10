@@ -1,0 +1,15 @@
+company_name: DigitalOcean
+company_slug: digitalocean
+domain: digitalocean.com
+careers_url: https://www.digitalocean.com/careers/open-roles
+ats: greenhouse
+ats_token: digitalocean98
+inherited_components: []
+notes: 'factory-migration-accounts.xlsx Qualified #6 (business-value). Identity team migrating legacy
+  data pipelines to modern eventing architectures. Doc posting: Senior Software Engineer, Identity & Access
+  Management, first published Apr 23, 2026. Driver source: Q2 2026 results, Aug 4, 2026. NOTE: DigitalOcean''s
+  careers site is client-rendered with no server-rendered postings and no public Greenhouse/Lever/Ashby
+  board was found (identity verified Oct 9, 2026), so collection is expected to fail with no parseable
+  items.'
+origin: manual
+account_id: ''

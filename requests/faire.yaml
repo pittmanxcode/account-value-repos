@@ -1,0 +1,14 @@
+company_name: Faire
+company_slug: faire
+domain: faire.com
+careers_url: https://job-boards.greenhouse.io/faire
+ats: greenhouse
+ats_token: faire
+inherited_components: []
+notes: 'factory-migration-accounts.xlsx Qualified #10 (business-value). Rebuilding how data moves from
+  its production databases into analytics (replacing a Fivetran/Kafka/Spark/Airflow setup with Kafka and
+  Iceberg) and migrating existing pipelines onto it, as it opened its marketplace to business buyers (Jun
+  18, 2026). Doc posting: Staff Data Infrastructure Engineer, published Oct 1, 2026. Driver source: Digital
+  Commerce 360, Jun 18, 2026.'
+origin: manual
+account_id: ''

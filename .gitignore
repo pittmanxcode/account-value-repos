@@ -12,7 +12,6 @@ __pycache__/
 
 # local run outputs (published via PRs, not direct commits)
 accounts/
-requests/
 failures/
 validation-report.txt
 

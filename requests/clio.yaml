@@ -1,0 +1,15 @@
+company_name: Clio
+company_slug: clio
+domain: clio.com
+careers_url: https://clio.wd3.myworkdayjobs.com/ClioCareerSite
+ats: ''
+ats_token: ''
+inherited_components: []
+notes: 'factory-migration-accounts.xlsx Qualified #4 (business-value). Upgrading Clio Operate (the ShareDo
+  platform it bought) to .NET 8+ and Svelte.js with containerized deployments, after launching Clio Operate
+  in North America (Mar 9, 2026). Doc posting: C# Developer, Clio Operate (Manchester), posted Sep 4,
+  2026. Driver source: Clio release, Mar 9, 2026. NOTE: clio.com blocks non-browser clients (HTTP 403)
+  and no public Greenhouse/Lever/Ashby board was found (identity verified Oct 9, 2026), so collection
+  is expected to fail with a 403 failure report.'
+origin: manual
+account_id: ''

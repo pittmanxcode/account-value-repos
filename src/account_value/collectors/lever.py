@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from datetime import UTC, datetime
+from html import escape as html_escape
 from pathlib import Path
 
 import httpx
@@ -29,6 +30,15 @@ def collect(token: str, raw_dir: Path, fetch=None) -> CollectionResult:
     jobs, bullets = [], []
     for posting in payload:
         raw_html = posting.get("descriptionPlain", "") or posting.get("description", "")
+        # Many Lever boards keep the real content in structured `lists` (e.g.
+        # "Responsibilities:" with the full HTML body) rather than the free-form
+        # description. Render each list as a heading followed by its content so
+        # the responsibility-section parser can see those postings at all.
+        for item in posting.get("lists") or []:
+            heading = html_escape((item.get("text") or "").strip())
+            content = item.get("content") or ""
+            if heading and content:
+                raw_html += f"\n<h3>{heading}</h3>\n{content}"
         text = html_to_text(raw_html) if "<" in raw_html else raw_html
         categories = posting.get("categories", {})
         jobs.append(JobPosting(

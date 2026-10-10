@@ -1,0 +1,14 @@
+company_name: ID.me
+company_slug: id-me
+domain: id.me
+careers_url: https://job-boards.greenhouse.io/idme
+ats: greenhouse
+ats_token: idme
+inherited_components: []
+notes: 'factory-migration-accounts.xlsx Qualified #15 (business-value). New principal role to consolidate
+  legacy identity data into modular services; the identity layer serves 20 federal and 45 state agencies
+  and added Medicare.gov sign-in under a CMS contract starting early 2026. Doc posting: Principal Engineer,
+  Person & Trust Platform, first published Jul 2, 2026. Driver source: ID.me release, Dec 16, 2025 (CMS
+  contract).'
+origin: manual
+account_id: ''

@@ -10,19 +10,28 @@ import html
 import re
 
 RESP_HEADING_PAT = re.compile(
-    r"(responsibilit|duties|what you.?ll (do|be doing)|what you will (do|be doing)|"
-    r"your (role|responsibilities)|about (the|your) (role|job|position)|the role|"
+    r"(responsibilit|responsabilit|duties|what you( will|.?ll) (do|be doing|accomplish)|"
+    r"your (role|responsibilities|mission)|about (the|your|this) (role|job|position)|the role|"
     r"key responsibilities|day.?to.?day|in this role|areas of responsibility|"
-    r"role overview|担当業務|職務内容)",
+    r"role overview|^the opportunity$|^what your contributions|"
+    r"key areas of focus|^how you.?ll|^you will\b|you will$|"
+    r"^main activities|^the work!? ?$|^success in your first|"
+    r"^what your team does|^a day in the life|"
+    r"purpose of the (job|role|position)|o seu desafio|sobre a vaga|担当業務|職務内容)",
     re.I,
 )
 STOP_HEADING_PAT = re.compile(
-    r"^(what (we.?re looking for|you.?ll need|we look for|makes|success)|qualification|"
-    r"requirements|who you are|you (are|have)|about you|nice to have|bonus points|skills|"
+    r"^(what (we.?re looking for|you( will|.?ll) (need|bring)|we look for|makes|success)|"
+    r"qualification|requirements?|"
+    r"(basic|minimum) (qualification|requirement)s?|"
+    r"who you are|you (are|have)|about you|nice to have|bonus points|skills|"
     r"experience|education|skills & competencies|working conditions|"
     r"about (us|the team|the opportunity|the company)|about the team|"
-    r"our (mission|values|benefits)|compensation|pay|benefits|perks|"
-    r"why (join|you will love)|eoe|equal|total rewards|how to apply|"
+    r"our (mission|values|benefits)|compensation|pay|benefits|perks|culture|hybrid model|"
+    r"why (join|you( will|.?ll) love)|what you.?ll love|let.?s talk about you|"
+    r".*perks|knowledge\b|exigences|salary range|technical expertise|"
+    r"additional capabilities|o que buscamos|we.?re excited about you|"
+    r"eoe|equal|total rewards|how to apply|"
     r"future growth|応募資格|deployment.*|our commitment)",
     re.I,
 )

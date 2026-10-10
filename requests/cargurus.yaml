@@ -1,0 +1,13 @@
+company_name: CarGurus
+company_slug: cargurus
+domain: cargurus.com
+careers_url: https://job-boards.greenhouse.io/cargurus
+ats: greenhouse
+ats_token: cargurus
+inherited_components: []
+notes: 'factory-migration-accounts.xlsx Qualified #25 (end-of-life). Finishing its Kubernetes platform''s
+  move off ingress-nginx onto Gateway API; the Kubernetes project stopped all fixes for ingress-nginx,
+  including security patches, after March 2026. Doc posting: Team Lead, DevX Kubernetes Platform, first
+  published Jul 2, 2026. Driver source: Kubernetes blog, Nov 11, 2025.'
+origin: manual
+account_id: ''

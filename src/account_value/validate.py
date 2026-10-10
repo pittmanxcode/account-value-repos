@@ -18,6 +18,7 @@ from account_value.value_model import ADOPTION
 class ValidationReport:
     passed: bool = True
     failures: list[str] = field(default_factory=list)
+    excluded_jobs: list[dict] = field(default_factory=list)
 
     def check(self, name: str, ok: bool, detail: str = "") -> None:
         if not ok:
@@ -54,10 +55,18 @@ def validate_package(
         "every bullet classified or flagged noise",
         all((r["cluster"] or int(r["is_noise"]) == 1) for r in normalized),
     )
+    # Postings that produce no responsibility bullets (talent pools, general
+    # applications) are recorded as explicit exclusions instead of failing the
+    # package; a package where nothing at all was modeled still fails closed.
+    covered = {r["job_id"] for r in normalized}
+    report.excluded_jobs = [
+        {"job_id": j["job_id"], "title": j.get("title", "")}
+        for j in jobs if j["job_id"] not in covered
+    ]
     report.check(
-        "every job appears in normalized bullets",
-        {j["job_id"] for j in jobs} <= {r["job_id"] for r in normalized},
-        f"missing: {sorted({j['job_id'] for j in jobs} - {r['job_id'] for r in normalized})[:5]}",
+        "at least one posting modeled (excluded postings are listed, not counted)",
+        bool(covered),
+        f"{len(report.excluded_jobs)} of {len(jobs)} postings excluded, none modeled",
     )
 
     # Scoring bounds
@@ -169,6 +178,20 @@ def validate_package(
 
 
 def format_report(report: ValidationReport) -> str:
-    if report.passed:
-        return "ALL VALIDATIONS PASSED"
-    return "VALIDATION FAILED:\n" + "\n".join(f"  FAIL  {f}" for f in report.failures)
+    head = (
+        "ALL VALIDATIONS PASSED"
+        if report.passed
+        else "VALIDATION FAILED:\n" + "\n".join(f"  FAIL  {f}" for f in report.failures)
+    )
+    if not report.excluded_jobs:
+        return head
+    lines = [
+        head,
+        "",
+        f"Excluded postings: {len(report.excluded_jobs)} produced no parseable"
+        " responsibilities (talent pools, general applications); recorded, not modeled:",
+    ]
+    lines.extend(
+        f"  - [{job['job_id']}] {job['title']}".rstrip() for job in report.excluded_jobs
+    )
+    return "\n".join(lines)

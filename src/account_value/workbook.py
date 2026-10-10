@@ -10,6 +10,7 @@ tmp/), reading a validated JSON spec.
 from __future__ import annotations
 
 import json
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -253,7 +254,7 @@ def convert(spec_path: Path, out_path: Path, project_root: Path | None = None) -
     root = project_root or ROOT
     script = Path(__file__).parent / "wb_convert.js"
     result = subprocess.run(
-        ["node", str(script), str(spec_path), str(out_path)],
+        [shutil.which("node") or "node", str(script), str(spec_path), str(out_path)],
         cwd=root, capture_output=True, text=True, timeout=120,
         env={"PATH": "/usr/local/bin:/usr/bin:/bin", "HOME": str(Path.home())},
     )

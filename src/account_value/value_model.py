@@ -90,6 +90,7 @@ def build_model(
         total_bullets = sum(distribution.values()) or 1
         basis = pay_basis(job.title, job.pay_mid_posted or None, title_overrides)
         totals = {"conservative": 0.0, "base": 0.0, "upside": 0.0}
+        first_row = len(scored)
         for cluster_key, count in sorted(distribution.items(), key=lambda kv: -kv[1]):
             cluster = CLUSTER_BY_KEY[cluster_key]
             hours = ANNUAL_HOURS * count / total_bullets
@@ -112,6 +113,14 @@ def build_model(
                 row[f"saved_value_{scenario}"] = round(saved * basis.hourly, 0)
                 totals[scenario] += saved
             scored.append(row)
+        # Per-row rounding to 0.1 h can drift the role's sum past the ±0.5 h
+        # validation gate on roles with many clusters; land the remainder on
+        # the smallest cluster so every role sums to exactly ANNUAL_HOURS.
+        job_rows = scored[first_row:]
+        if job_rows:
+            drift = round(ANNUAL_HOURS - sum(r["role_hours_annual"] for r in job_rows), 1)
+            if drift:
+                job_rows[-1]["role_hours_annual"] = round(job_rows[-1]["role_hours_annual"] + drift, 1)
 
         role_rows.append({
             "job_id": job.job_id, "title": job.title, "department": job.department,

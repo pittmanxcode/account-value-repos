@@ -66,7 +66,7 @@ _CAREERS_PATHS = ["", "/careers", "/careers/", "/jobs", "/about/jobs", "/company
 _ATS_PROBES = [
     ("greenhouse", "https://boards-api.greenhouse.io/v1/boards/{token}/jobs", "joined"),
     ("lever", "https://api.lever.co/v0/postings/{token}?mode=json", "joined"),
-    ("ashby", "https://postings-api.ashbyhq.com/{token}", "joined"),
+    ("ashby", "https://api.ashbyhq.com/posting-api/job-board/{token}", "joined"),
 ]
 
 
