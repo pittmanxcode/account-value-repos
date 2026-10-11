@@ -15,7 +15,7 @@ from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
 
-from account_value.parse import extract_bullets, extract_posted_pay, html_to_text
+from account_value.parse import extract_bullets, extract_posted_pay_detail, html_to_text
 from account_value.value_model import Bullet, JobPosting
 
 
@@ -66,7 +66,8 @@ def postings_from_greenhouse_payload(payload: dict) -> tuple[list[JobPosting], l
     for job in payload.get("jobs", []):
         raw_html = job.get("content") or ""
         text = html_to_text(raw_html)
-        pay_min, pay_max, pay_mid = extract_posted_pay(raw_html)
+        pay = extract_posted_pay_detail(raw_html)
+        pay_min, pay_max, pay_mid = pay.min_usd, pay.max_usd, pay.mid_usd
         jobs.append(JobPosting(
             job_id=str(job["id"]),
             title=job["title"].strip(),
@@ -76,6 +77,7 @@ def postings_from_greenhouse_payload(payload: dict) -> tuple[list[JobPosting], l
             first_published=(job.get("first_published") or "")[:10],
             url=job.get("absolute_url", ""),
             pay_min_posted=pay_min, pay_max_posted=pay_max, pay_mid_posted=pay_mid,
+            pay_note=pay.note,
         ))
         for seq, (section, bullet) in enumerate(extract_bullets(text), 1):
             bullets.append(Bullet(

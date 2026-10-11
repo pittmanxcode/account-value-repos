@@ -204,7 +204,7 @@ def build_spec(
         ["Fit rubric weights", "Digital executability 25 · Factory workflow match 25 · Input/system access 15 · Output verifiability 15 · Professional quality with human review 15 · Risk/governance 5"],
         ["Normal setup", "Repo/document access, approved connectors, terminal/browser tools, Missions, automations, human approval"],
         ["Bespoke score", "Adds a named, concrete integration build with human checkpoint; never treated as already available"],
-        ["Pay basis", "Posted US ranges first, else BLS OEWS May 2025 median × seniority factor"],
+        ["Pay basis", "Posted ranges first (HTML block or posting text; non-USD converted at the dated rates in registry/fx_rates.yaml, noted per row), else BLS OEWS May 2025 median × seniority factor"],
         ["Hours", f"{ANNUAL_HOURS:,} per FTE-year; allocated across clusters in proportion to responsibility bullets"],
         ["Saved hours formula", "role_hours × addressable_share × net_time_reduction × adoption × fit_confidence"],
         ["Inherited value", "Preserved verbatim from intake/the well; combined totals require overlap reconciliation"],

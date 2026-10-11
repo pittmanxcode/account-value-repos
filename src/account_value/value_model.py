@@ -32,6 +32,7 @@ class JobPosting:
     pay_min_posted: int = 0
     pay_max_posted: int = 0
     pay_mid_posted: int = 0
+    pay_note: str = ""  # how the posted pay was read: "html block", "text", "text, CAD at …"
 
 
 @dataclass
@@ -88,7 +89,8 @@ def build_model(
     for job in jobs:
         distribution = dict(by_job[twin[job.job_id]]) if job.job_id in twin else dict(by_job[job.job_id])
         total_bullets = sum(distribution.values()) or 1
-        basis = pay_basis(job.title, job.pay_mid_posted or None, title_overrides)
+        basis = pay_basis(job.title, job.pay_mid_posted or None, title_overrides,
+                          posted_note=job.pay_note)
         totals = {"conservative": 0.0, "base": 0.0, "upside": 0.0}
         first_row = len(scored)
         for cluster_key, count in sorted(distribution.items(), key=lambda kv: -kv[1]):

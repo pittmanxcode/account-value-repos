@@ -1,0 +1,14 @@
+# Fixed exchange rates used to convert posted non-USD pay ranges into US dollars.
+# Approved by Michael 2026-10-10 (option A): dated fixed rates, labelled on every
+# row they touch, rather than BLS US medians for roles paid in other currencies.
+#
+# Source: Banque de France daily parities, 2026-10-01 (quoted per 1 EUR):
+#   USD 1.1298 · GBP 0.8537 · CAD 1.6095
+# usd_per_unit = USD-per-EUR / unit-per-EUR. Update the date when you refresh.
+as_of: "2026-10-01"
+source: "Banque de France daily parities, 2026-10-01"
+usd_per_unit:
+  USD: 1.0
+  EUR: 1.1298
+  GBP: 1.3234
+  CAD: 0.7020

@@ -72,9 +72,9 @@ def test_workday_collects_postings_bullets_and_pay(tmp_path):
                            tmp_path, fetch=fake_fetch)
     assert result.ats == "workday" and result.advertised_count == 2 and result.reconciled
     assert [j.job_id for j in result.jobs] == ["R-1", "R-2"]
-    # Posted pay only parses Greenhouse-style pay-range blocks today; Workday
-    # text falls back to BLS, so the collector leaves it at zero.
-    assert result.jobs[0].pay_mid_posted == 0
+    # The salary line under the Compensation heading is read from the text.
+    assert (result.jobs[0].pay_min_posted, result.jobs[0].pay_mid_posted) == (180000, 200000)
+    assert result.jobs[0].pay_note == "text"
     assert result.jobs[0].first_published == "2026-10-09"
     assert [b.verbatim_responsibility for b in result.bullets if b.job_id == "R-1"] == [
         "Build the data platform on Kubernetes", "Own on-call for ingestion pipelines"]

@@ -116,8 +116,11 @@ EOF
 
 ## Known gaps (deferred)
 
-- Workday posted pay is not parsed (BLS fallback); Greenhouse postings that print pay as
-  "The base pay for this role is: $X - $Y" are also missed.
+- Posted pay is read from the posting text on every board as of Oct 10, 2026 (HTML block
+  first, then text: symbols or codes, K suffixes, "to"/"and"/"up to", monthly and hourly
+  figures; CAD/GBP/EUR converted at the dated rates in `registry/fx_rates.yaml`). Each
+  row's `pay_source` says how it was read. Roles whose posting prints no pay still fall
+  back to BLS. Refresh the FX file when the rates are stale; the date is in it.
 - Postings listed once per location inflate the pipeline's hours (DigitalOcean: 122
   engineering rows, 69 distinct titles). The brief flags it; the model doesn't dedupe.
 - Some real engineering postings are excluded as "no parseable responsibilities"
