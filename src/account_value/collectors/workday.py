@@ -26,7 +26,7 @@ from pathlib import Path
 import httpx
 
 from account_value.collectors.base import CollectionResult, CollectorError, save_snapshot
-from account_value.parse import extract_bullets, extract_posted_pay, html_to_text
+from account_value.parse import extract_bullets, extract_posted_pay_detail, html_to_text
 from account_value.value_model import Bullet, JobPosting
 
 PAGE_SIZE = 20
@@ -107,7 +107,7 @@ def _collect(api: str, base: str, site: str, raw_dir: Path, fetch, polite: bool)
         details.append(info)
         raw_html = info.get("jobDescription") or ""
         text = html_to_text(raw_html)
-        pay_min, pay_max, pay_mid = extract_posted_pay(raw_html)
+        pay = extract_posted_pay_detail(raw_html)
         job = JobPosting(
             job_id=str(info.get("jobReqId") or info.get("id") or path),
             title=(info.get("title") or summary.get("title") or "").strip(),
@@ -115,7 +115,8 @@ def _collect(api: str, base: str, site: str, raw_dir: Path, fetch, polite: bool)
             location=info.get("location") or summary.get("locationsText") or "",
             first_published=(info.get("startDate") or "")[:10],
             url=info.get("externalUrl") or f"{base}/{site}{path}",
-            pay_min_posted=pay_min, pay_max_posted=pay_max, pay_mid_posted=pay_mid,
+            pay_min_posted=pay.min_usd, pay_max_posted=pay.max_usd, pay_mid_posted=pay.mid_usd,
+            pay_note=pay.note,
         )
         jobs.append(job)
         for seq, (section, bullet) in enumerate(extract_bullets(text), 1):

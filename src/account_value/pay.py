@@ -133,15 +133,18 @@ def pay_basis(
     title: str,
     posted_mid: int | str | None = None,
     overrides: dict[str, tuple[str, str]] | None = None,
+    posted_note: str = "",
 ) -> PayBasis:
     """Resolve the pay basis for one title.
 
     overrides maps exact titles -> (soc, seniority), loaded from a per-account
-    YAML file when one exists.
+    YAML file when one exists. posted_note says how a posted range was read
+    (see parse.PostedPay) and is carried into pay_source.
     """
     if posted_mid:
         base = int(posted_mid)
-        soc, seniority, source = "", "", "posted pay range"
+        soc, seniority = "", ""
+        source = f"posted pay range ({posted_note})" if posted_note else "posted pay range"
         if overrides and title in overrides:
             soc, seniority = overrides[title]
         else:

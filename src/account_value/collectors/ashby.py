@@ -12,7 +12,7 @@ from account_value.collectors.base import (
     CollectorError,
     save_snapshot,
 )
-from account_value.parse import extract_bullets, html_to_text
+from account_value.parse import extract_bullets, extract_posted_pay_detail, html_to_text
 from account_value.value_model import Bullet, JobPosting
 
 API = "https://api.ashbyhq.com/posting-api/job-board/{token}?includeCompensation=true"
@@ -41,6 +41,11 @@ def collect(token: str, raw_dir: Path, fetch=None) -> CollectionResult:
         raw_html = posting.get("descriptionHtml", "") or posting.get("descriptionPlain", "")
         text = html_to_text(raw_html)
         pay_min, pay_max, pay_mid = _posted_salary(posting)
+        pay_note = "structured compensation" if pay_mid else ""
+        if not pay_mid:
+            # Many Ashby boards put the band in the description text instead.
+            pay = extract_posted_pay_detail(raw_html)
+            pay_min, pay_max, pay_mid, pay_note = pay.min_usd, pay.max_usd, pay.mid_usd, pay.note
         jobs.append(JobPosting(
             job_id=posting.get("id", ""),
             title=posting.get("title", "").strip(),
@@ -48,6 +53,7 @@ def collect(token: str, raw_dir: Path, fetch=None) -> CollectionResult:
             location=posting.get("location", "") or posting.get("office", ""),
             url=posting.get("jobUrl", "") or posting.get("applyUrl", ""),
             pay_min_posted=pay_min, pay_max_posted=pay_max, pay_mid_posted=pay_mid,
+            pay_note=pay_note,
         ))
         for seq, (section, bullet) in enumerate(extract_bullets(text), 1):
             bullets.append(Bullet(

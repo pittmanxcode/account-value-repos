@@ -13,7 +13,7 @@ from account_value.collectors.base import (
     CollectorError,
     save_snapshot,
 )
-from account_value.parse import extract_bullets, html_to_text
+from account_value.parse import extract_bullets, extract_posted_pay_detail, html_to_text
 from account_value.value_model import Bullet, JobPosting
 
 API = "https://api.lever.co/v0/postings/{token}?mode=json"
@@ -41,6 +41,11 @@ def collect(token: str, raw_dir: Path, fetch=None) -> CollectionResult:
                 raw_html += f"\n<h3>{heading}</h3>\n{content}"
         text = html_to_text(raw_html) if "<" in raw_html else raw_html
         categories = posting.get("categories", {})
+        # Lever boards usually print the pay range in the closing `additional`
+        # block, outside the description and lists; read pay from all of it.
+        pay = extract_posted_pay_detail(
+            raw_html + "\n" + (posting.get("additionalPlain") or posting.get("additional") or "")
+        )
         jobs.append(JobPosting(
             job_id=posting.get("id", ""),
             title=posting.get("text", "").strip(),
@@ -48,6 +53,8 @@ def collect(token: str, raw_dir: Path, fetch=None) -> CollectionResult:
             location=categories.get("location", ""),
             first_published=str(posting.get("createdAt", "")),
             url=posting.get("applyUrl", "") or posting.get("hostedUrl", ""),
+            pay_min_posted=pay.min_usd, pay_max_posted=pay.max_usd, pay_mid_posted=pay.mid_usd,
+            pay_note=pay.note,
         ))
         # Lever text is plain; extract_bullets' virtual-heading detection
         # finds responsibility sections without markup.
