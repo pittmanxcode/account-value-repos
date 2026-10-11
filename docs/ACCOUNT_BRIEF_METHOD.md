@@ -96,8 +96,9 @@ A brief is acceptable when all of these hold:
   this phrase).
 - **It is short and scannable.** Michael's review of the Valon v1 (Oct 9, 2026): "a bit verbose,
   and could be written to be digested easier." Limits from that review, revised the same day after
-  the Fivetran example: the brief is under 1,200 words, not counting the Sources table or the
-  Droids table (the proof-point quotes are worth their length); "In one paragraph" is four
+  the Fivetran example: the brief is under 1,200 words, not counting the Sources table, the
+  Droids table (the proof-point quotes are worth their length), or the Quantified pains table
+  (its "who bears what" rows are sentences by design; exempted Oct 10 after DigitalOcean); "In one paragraph" is four
   sentences at most; Background is four bullets; "The chain" is prose, not a table, because the
   links need explaining, not listing; a fact appears once, where it carries the most weight;
   caveats go in the row or sentence they qualify.
